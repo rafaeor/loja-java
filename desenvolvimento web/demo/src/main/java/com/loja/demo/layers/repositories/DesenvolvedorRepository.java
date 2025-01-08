@@ -7,14 +7,14 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.loja.demo.layers.entities.Cliente;
+import com.loja.demo.layers.entities.Desenvolvedor;
 
 @Repository
-public interface DesenvolvedorRepository extends JpaRepository<Cliente, Long> {
+public interface DesenvolvedorRepository extends JpaRepository<Desenvolvedor, Long> {
 
-    @Query("SELECT c FROM Cliente c WHERE c.nome LIKE :nome")
-    Cliente getClientePorNome(String nome);
+    @Query("SELECT c FROM Desenvolvedor c WHERE c.nome LIKE :nome")
+    Desenvolvedor getDesenvolvedorPorNome(String nome);
 
-    @Query("SELECT p FROM Cliente p WHERE p.nome LIKE %:nome%")
-    List<Cliente> buscarPorNome(@Param("nome") String nome);
+    @Query("SELECT p FROM Desenvolvedor p WHERE p.nome LIKE %:nome%")
+    List<Desenvolvedor> buscarPorNome(@Param("nome") String nome);
 }

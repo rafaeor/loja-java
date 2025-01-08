@@ -1,14 +1,12 @@
 package com.loja.demo.layers.entities;
 
-import java.util.List;
-
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 
+@Entity
 public class Desenvolvedor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,13 +19,16 @@ public class Desenvolvedor {
     private String email;
 
     // Relação 1:N com Compra
-    @OneToMany(mappedBy = "desenvolvedor", cascade = CascadeType.ALL)
-    private List<Template> produtos;
-
-    // Relação 1:N com Compra
-    @OneToMany(mappedBy = "desenvolvedor", cascade = CascadeType.ALL)
-    private List<Template> contratos;
-
+    /*
+     * 
+     * @OneToMany(mappedBy = "desenvolvedor", cascade = CascadeType.ALL)
+     * private List<Template> produtos;
+     * 
+     * // Relação 1:N com Compra
+     * 
+     * @OneToMany(mappedBy = "desenvolvedor", cascade = CascadeType.ALL)
+     * private List<Contrato> contratos;
+     */
     // Getters e Setters
     public Long getId() {
         return id;
@@ -51,21 +52,5 @@ public class Desenvolvedor {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public List<Template> getTemplates() {
-        return produtos;
-    }
-
-    public void setTemplates(List<Template> produtos) {
-        this.produtos = produtos;
-    }
-
-    public List<Template> getContratos() {
-        return produtos;
-    }
-
-    public void setContratos(List<Template> produtos) {
-        this.produtos = produtos;
     }
 }

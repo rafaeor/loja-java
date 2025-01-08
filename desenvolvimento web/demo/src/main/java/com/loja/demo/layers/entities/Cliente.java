@@ -1,14 +1,10 @@
 package com.loja.demo.layers.entities;
 
-import java.util.List;
-
 import jakarta.persistence.Column;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 
 @Entity
 public class Cliente {
@@ -25,10 +21,6 @@ public class Cliente {
 
     @Column(unique = true, nullable = false)
     private String email;
-
-    // Relação 1:N com Compra
-    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
-    private List<Compra> compras;
 
     // @Column(nullable = false)
     // private boolean oculto; // primitive boolean, defaults to false
@@ -50,19 +42,19 @@ public class Cliente {
         this.nome = nome;
     }
 
+    public String getEmail() {
+        return nome;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getCpf() {
         return cpf;
     }
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
-    }
-
-    public List<Compra> getCompras() {
-        return compras;
-    }
-
-    public void setCompras(List<Compra> compras) {
-        this.compras = compras;
     }
 }

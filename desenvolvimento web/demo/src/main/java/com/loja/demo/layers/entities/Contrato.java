@@ -1,6 +1,7 @@
 package com.loja.demo.layers.entities;
 
 import java.util.Date;
+import java.util.Optional;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -17,30 +18,21 @@ public class Contrato {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "venda_id", nullable = false)
-    private Venda venda; // Relacionamento com a entidade Venda
-
     @Column(nullable = false)
     private Date dataInicio; // Data de início
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private Date dataFim; // Data de fim
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private Double preco; // Preço
 
-    @ManyToOne
-    @JoinColumn(name = "cliente_id", nullable = false)
-    private Cliente cliente; // Relacionamento com a entidade Cliente
+    @Column(nullable = false, unique = true)
+    private String nome;
 
     @ManyToOne
     @JoinColumn(name = "desenvolvedor_id", nullable = false)
-    private Desenvolvedor desenvolvedor; // Relacionamento com a entidade Desenvolvedor
-
-    @ManyToOne
-    @JoinColumn(name = "compra_id", nullable = false)
-    private Compra compra; // Relacionamento com a entidade Compra
+    private Desenvolvedor desenvolvedor;
 
     // Getters e Setters
     public Long getId() {
@@ -49,14 +41,6 @@ public class Contrato {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Venda getVenda() {
-        return venda;
-    }
-
-    public void setVenda(Venda venda) {
-        this.venda = venda;
     }
 
     public Date getDataInicio() {
@@ -83,27 +67,20 @@ public class Contrato {
         this.preco = preco;
     }
 
-    public Cliente getCliente() {
-        return cliente;
+    public void getNome(String nome) {
+        this.nome = nome;
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public Desenvolvedor getDesenvolvedor() {
-        return desenvolvedor;
+    public Optional<Desenvolvedor> getDesenvolvedor() {
+        return Optional.ofNullable(desenvolvedor);
     }
 
     public void setDesenvolvedor(Desenvolvedor desenvolvedor) {
         this.desenvolvedor = desenvolvedor;
     }
 
-    public Compra getCompra() {
-        return compra;
-    }
-
-    public void setCompra(Compra compra) {
-        this.compra = compra;
-    }
 }

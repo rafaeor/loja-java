@@ -1,0 +1,18 @@
+Esse arquivo é referente as requisiões utilizando o Thunder Client.
+
+mysql -u root -p
+
+POST
+{
+    "nome": "John Doe",
+    "email": "john.doe@example.com",
+    "cpf": "051.403.501-41"
+}
+POST
+localhost:8080/clientes/1/template?produto=SiteDeApostas
+localhost:8080/clientes/1/contrato?produto=FazerSistemaCadastramento
+
+GET
+localhost:8080/compras/Caio
+localhost:8080/clientes/1/templates
+localhost:8080/dev/1/vendas

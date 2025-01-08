@@ -4,16 +4,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.loja.demo.exceptions.ValidacaoException;
-import com.loja.demo.layers.entities.Template;
-import com.loja.demo.layers.repositories.TemplateRepository;
+import com.loja.demo.layers.entities.Contrato;
+import com.loja.demo.layers.repositories.ContratoRepository;
 
 @Service
 public class ContratoService {
     @Autowired
-    TemplateRepository produtoRepository;
+    ContratoRepository contratoRepository;
 
-    public Template cadastrarProduto(Template produto) throws ValidacaoException {
-        produtoRepository.save(produto);
+    public Contrato cadastrarContrato(Contrato contrato) throws ValidacaoException {
+        contratoRepository.save(contrato);
         return null;
     }
 }

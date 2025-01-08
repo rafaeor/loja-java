@@ -10,10 +10,10 @@ import com.loja.demo.layers.repositories.TemplateRepository;
 @Service
 public class TemplateService {
     @Autowired
-    TemplateRepository produtoRepository;
+    TemplateRepository templateRepository;
 
-    public Template cadastrarProduto(Template produto) throws ValidacaoException {
-        produtoRepository.save(produto);
+    public Template cadastrarTemplate(Template template) throws ValidacaoException {
+        templateRepository.save(template);
         return null;
     }
 }

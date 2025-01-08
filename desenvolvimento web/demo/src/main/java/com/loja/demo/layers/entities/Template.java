@@ -15,20 +15,18 @@ public class Template {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "venda_id", nullable = false)
-    private Venda venda; // Relacionamento com a entidade Venda
+    @Column(nullable = false, unique = true)
+    private String nome;
+
+    @Column(nullable = true)
+    private String descricao;
 
     @Column(nullable = false)
     private Double preco; // Preço
 
     @ManyToOne
     @JoinColumn(name = "desenvolvedor_id", nullable = false)
-    private Desenvolvedor desenvolvedor; // Relacionamento com a entidade Desenvolvedor
-
-    @ManyToOne
-    @JoinColumn(name = "compra_id", nullable = false)
-    private Compra compra; // Relacionamento com a entidade Compra
+    private Desenvolvedor desenvolvedor;
 
     // Getters e Setters
     public Long getId() {
@@ -39,16 +37,24 @@ public class Template {
         this.id = id;
     }
 
-    public Venda getVenda() {
-        return venda;
-    }
-
-    public void setVenda(Venda venda) {
-        this.venda = venda;
-    }
-
     public Double getPreco() {
         return preco;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void getDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public void setPreco(Double preco) {
@@ -61,13 +67,5 @@ public class Template {
 
     public void setDesenvolvedor(Desenvolvedor desenvolvedor) {
         this.desenvolvedor = desenvolvedor;
-    }
-
-    public Compra getCompra() {
-        return compra;
-    }
-
-    public void setCompra(Compra compra) {
-        this.compra = compra;
     }
 }

@@ -18,14 +18,19 @@ public class Compra {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "cliente_id", nullable = false)
+    @JoinColumn(name = "cliente_id", nullable = true)
     private Cliente cliente;
 
     @Column(nullable = false)
     private Date data;
 
-    @Column(nullable = false)
-    private String tipo;
+    @ManyToOne
+    @JoinColumn(nullable = true)
+    private Template template;
+
+    @ManyToOne
+    @JoinColumn(nullable = true)
+    private Contrato contrato;
 
     // Getters e Setters
     public Long getId() {
@@ -52,12 +57,19 @@ public class Compra {
         this.data = data;
     }
 
-    public String getTipo() {
-        return tipo;
+    public Template getTemplate() {
+        return template;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public void setTemplate(Template template) {
+        this.template = template;
     }
 
+    public Contrato getContrato() {
+        return contrato;
+    }
+
+    public void setContrato(Contrato contrato) {
+        this.contrato = contrato;
+    }
 }

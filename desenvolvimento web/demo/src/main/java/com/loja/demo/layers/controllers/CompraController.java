@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.loja.demo.layers.entities.Compra;
 import com.loja.demo.layers.services.CompraService;
 
 @RestController
@@ -18,7 +19,7 @@ public class CompraController {
     private CompraService compraService;
 
     @GetMapping("/{nomeCliente}")
-    public List<Object[]> obterComprasPorCliente(@PathVariable String nomeCliente) {
-        return compraService.obterProdutosEDataCompra(nomeCliente);
+    public List<Compra> obterComprasPorCliente(@PathVariable String nomeCliente) {
+        return compraService.obterProdutos(nomeCliente);
     }
 }
