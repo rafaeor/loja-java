@@ -1,4 +1,4 @@
-#Mercado Dev
+# Mercado Dev
 Projeto para prova de desenvolvimento backend. Este projeto tem o objetivo de conectar diretamente desenvolvedores e clientes com o objetivo de facilitar a contratação de serviços de desenvolvimento de software.
 
 O objetivo da plataforma descrita neste projeto é facilitar a comunicação direta entre desenvolvedores e clientes, permitindo que os clientes contratem desenvolvedores para tirar dúvidas técnicas, realizar produção de código ou adquirir templates desenvolvidos por eles. O sistema terá funcionalidades de cadastro e gerenciamento de usuários, como desenvolvedores e clientes, além de permitir transações financeiras para a contratação de serviços e compra de templates.
