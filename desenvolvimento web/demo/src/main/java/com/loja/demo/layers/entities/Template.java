@@ -1,5 +1,7 @@
 package com.loja.demo.layers.entities;
 
+import java.util.Optional;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -23,6 +25,9 @@ public class Template {
 
     @Column(nullable = false)
     private Double preco; // Preço
+
+    @Column(nullable = true)
+    private Double saldo; // Preço
 
     @ManyToOne
     @JoinColumn(name = "desenvolvedor_id", nullable = false)
@@ -61,11 +66,19 @@ public class Template {
         this.preco = preco;
     }
 
-    public Desenvolvedor getDesenvolvedor() {
-        return desenvolvedor;
+    public Optional<Desenvolvedor> getDesenvolvedor() {
+        return Optional.ofNullable(desenvolvedor);
     }
 
     public void setDesenvolvedor(Desenvolvedor desenvolvedor) {
         this.desenvolvedor = desenvolvedor;
+    }
+
+    public Double getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(Double saldo) {
+        this.saldo = saldo;
     }
 }

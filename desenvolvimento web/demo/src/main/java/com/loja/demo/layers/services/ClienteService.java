@@ -118,7 +118,7 @@ public class ClienteService {
         }
         if (tipo == "template") {
             Optional<Template> templateOptional = templateRepository.getTemplatePorNome(nomeProduto);
-            if (clienteOptional.isEmpty()) {
+            if (templateOptional.isEmpty()) {
                 throw new ValidacaoException("Template not found: " + nomeProduto);
             }
             Template template = templateOptional.get();
@@ -127,6 +127,19 @@ public class ClienteService {
             compra.setData(new Date());
             compra.setTemplate(template);
             compraRepository.save(compra);
+
+            // Registro da venda para o vendedor
+            Optional<Desenvolvedor> devOptional = template.getDesenvolvedor();
+            if (devOptional.isEmpty()) {
+                throw new ValidacaoException("Dev not found: " + nomeProduto);
+            }
+            Desenvolvedor desenvolvedor = devOptional.get();
+            Venda venda = new Venda();
+            venda.setDesenvolvedor(desenvolvedor);
+            venda.setData(new Date());
+            venda.setPreco(template.getPreco());
+            venda.setTipo(tipo);
+            vendaRepository.save(venda);
         } else if (tipo == "contrato") {
             Optional<Contrato> contratoOpicional = contratoRepository.getPorNome(nomeProduto);
             if (clienteOptional.isEmpty()) {

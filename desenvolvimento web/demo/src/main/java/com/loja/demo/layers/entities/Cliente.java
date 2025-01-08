@@ -22,6 +22,9 @@ public class Cliente {
     @Column(unique = true, nullable = false)
     private String email;
 
+    @Column(unique = false, nullable = true)
+    private Double saldo;
+
     // @Column(nullable = false)
     // private boolean oculto; // primitive boolean, defaults to false
 
@@ -56,5 +59,13 @@ public class Cliente {
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
+    }
+
+    public Double getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(Double saldo) {
+        this.saldo = saldo;
     }
 }

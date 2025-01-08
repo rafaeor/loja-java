@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.loja.demo.exceptions.ValidacaoException;
@@ -62,6 +63,14 @@ public class desenvolvedorController {
     public ResponseEntity<List<Venda>> getVendasByDesenvolvedorId(@PathVariable Long desenvolvedorId) {
         List<Venda> vendas = desenvolvedorService.getVendasByDesenvolvedorId(desenvolvedorId);
         return ResponseEntity.status(HttpStatus.OK).body(vendas);
+    }
+
+    // Endpoint to add a compra to a client
+    @PostMapping("/{desenvolvedorId}/template")
+    public ResponseEntity<String> addTemplate(@PathVariable Long id, @RequestParam String produto)
+            throws ValidacaoException {
+        desenvolvedorService.addCompra(id, produto, "template");
+        return ResponseEntity.status(HttpStatus.OK).body("Você cadastrou o template " + produto + " com sucesso!");
     }
 
 }

@@ -29,6 +29,13 @@ public class Venda {
 
     @Column(nullable = true)
     private Double preco;
+    @ManyToOne
+    @JoinColumn(nullable = true)
+    private Template template;
+
+    @ManyToOne
+    @JoinColumn(nullable = true)
+    private Contrato contrato;
 
     // Getters e Setters
     public Long getId() {
@@ -69,5 +76,21 @@ public class Venda {
 
     public void setPreco(Double preco) {
         this.preco = preco;
+    }
+
+    public Template getTemplate() {
+        return template;
+    }
+
+    public void setTemplate(Template template) {
+        this.template = template;
+    }
+
+    public Contrato getContrato() {
+        return contrato;
+    }
+
+    public void setContrato(Contrato contrato) {
+        this.contrato = contrato;
     }
 }

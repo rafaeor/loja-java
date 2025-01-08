@@ -1,5 +1,6 @@
 package com.loja.demo.layers.services;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,8 +10,10 @@ import org.springframework.stereotype.Service;
 
 import com.loja.demo.exceptions.ValidacaoException;
 import com.loja.demo.layers.entities.Desenvolvedor;
+import com.loja.demo.layers.entities.Template;
 import com.loja.demo.layers.entities.Venda;
 import com.loja.demo.layers.repositories.DesenvolvedorRepository;
+import com.loja.demo.layers.repositories.TemplateRepository;
 import com.loja.demo.layers.repositories.VendaRepository;
 
 @Service
@@ -19,6 +22,9 @@ public class DesenvolvedorService {
     VendaRepository vendaRepository;
     @Autowired
     private DesenvolvedorRepository desenvolvedorRepository;
+
+    @Autowired
+    TemplateRepository templateRepository;
 
     // Função para validar um cliente
     public void validarDev(Desenvolvedor dev) throws ValidacaoException {
@@ -81,4 +87,39 @@ public class DesenvolvedorService {
         return vendaRepository.findByDesenvolvedorId(desenvolvedorId);
     }
 
+    public void addCompra(Long id, String nomeProduto, String tipo) throws ValidacaoException {
+        Optional<Desenvolvedor> devOpt = desenvolvedorRepository.findById(id);
+        if (devOpt.isEmpty()) {
+            throw new ValidacaoException("Cliente not found with id: " + id);
+        }
+        Desenvolvedor dev = devOpt.get();
+        if (tipo != "template" && tipo != "contrato") {
+            throw new ValidacaoException("Tipo de produto inválido: " + tipo);
+        }
+        if (tipo == "template") {
+            Optional<Template> templateOptional = templateRepository.getTemplatePorNome(nomeProduto);
+            if (templateOptional.isEmpty()) {
+                throw new ValidacaoException("Template not found: " + nomeProduto);
+            }
+            Template template = templateOptional.get();
+            Venda venda = new Venda();
+            venda.setDesenvolvedor(dev);
+            venda.setData(new Date());
+            venda.setTemplate(template);
+            vendaRepository.save(venda);
+
+            // Registro da venda para o vendedor
+            Optional<Desenvolvedor> devOptional = template.getDesenvolvedor();
+            if (devOptional.isEmpty()) {
+                throw new ValidacaoException("Dev not found: " + nomeProduto);
+            }
+            Desenvolvedor desenvolvedor = devOptional.get();
+            Venda sell = new Venda();
+            sell.setDesenvolvedor(desenvolvedor);
+            sell.setData(new Date());
+            sell.setPreco(template.getPreco());
+            sell.setTipo(tipo);
+            vendaRepository.save(sell);
+        }
+    }
 }
